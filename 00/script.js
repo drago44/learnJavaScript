@@ -13,7 +13,7 @@ const personalMovieDB = {
     personalMovieDB.count = +prompt('Скількі  фільмів ви подивились', '');
     }
   },
-  rememberMyFilms: function () {
+  rememberMyFilms: function() {
     for (let i = 0; i < 2; i++){
       const a = prompt('Який останній фільм ви подивились', '').trim();
       const b = prompt('Як ви оцінюєте останній переглянутий фільм', '');
@@ -27,7 +27,7 @@ const personalMovieDB = {
       }
     }
   },
-  detectPersonalLevel: function () {
+  detectPersonalLevel: function() {
     if (personalMovieDB.count < 10){
       console.log('мало');
     } else if (personalMovieDB.count >=10 && personalMovieDB.count < 30 ) {
@@ -38,17 +38,23 @@ const personalMovieDB = {
       console.log('помилка');
     }
   },
-  showMyDB: function (hidden) {
+  showMyDB: function(hidden) {
     if (!hidden) {
       console.log(personalMovieDB);
     } else {
       console.log('DB is privat')
     }
   },
-  writeYourGenres: function () {
+  toggleVisibleMyDB: function() {
+    if (personalMovieDB.privat ){
+      personalMovieDB.privat = true;
+    } else {
+      personalMovieDB.privat = false;
+    }
+  },
+  writeYourGenres: function() {
     for (let i = 1; i <= 3; i++){
       personalMovieDB.genres[i - 1] = prompt(`Ваш улюблений жанр під номером ${i}`);
     }
   }
 }
-
