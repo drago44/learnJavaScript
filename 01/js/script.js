@@ -6,7 +6,7 @@ const movieDB = {
     "Апокалипсис сегодня ",
     "Ла-ла лэнд",
     "Одержимость",
-    "Скотт Пилигрим против..."
+    "Зомбиленд"
   ]
 };
 
@@ -16,7 +16,7 @@ const genre = poster.querySelector('.promo__genre');
 const movieList = document.querySelector('.promo__interactive-list');
 
 adv.forEach(item => {
-  item.remove();
+  item.remove(); 
 });
 
 genre.textContent = 'Драма';
