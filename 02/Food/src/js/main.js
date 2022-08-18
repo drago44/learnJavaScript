@@ -112,10 +112,15 @@ document.addEventListener('DOMContentLoaded', () => {
   modalTrigger.forEach((btn) => {
     btn.addEventListener('click', () => {
       modal.classList.add('show');
-      modal.classList.remove('hide')
+      modal.classList.remove('hide');
       document.body.style.overflow = 'hidden';
     });
   });
 
+  modalClose.addEventListener('click', () => {
+    modal.classList.add('hide');
+    modal.classList.remove('show');
+    document.body.style.overflow = '';
+  });
 
 });
