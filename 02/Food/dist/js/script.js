@@ -199,16 +199,17 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.overflow = 'hidden';
     });
   });
-  modalClose.addEventListener('click', () => {
+
+  function closeModal() {
     modal.classList.add('hide');
     modal.classList.remove('show');
     document.body.style.overflow = '';
-  });
+  }
+
+  modalClose.addEventListener('click', closeModal);
   modal.addEventListener('click', e => {
     if (e.target === modal) {
-      modal.classList.add('hide');
-      modal.classList.remove('show');
-      document.body.style.overflow = '';
+      closeModal();
     }
   });
 });
