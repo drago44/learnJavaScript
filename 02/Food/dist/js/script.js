@@ -187,7 +187,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  setClock('.timer', deadline);
+  setClock('.timer', deadline); //Modal
+
+  const modalTrigger = document.querySelectorAll('[data-modal]');
+  const modal = document.querySelector('.modal');
+  const modalClose = document.querySelector('[data-close]');
+  modalTrigger.forEach(btn => {
+    btn.addEventListener('click', () => {
+      modal.classList.add('show');
+      modal.classList.remove('hide');
+      document.body.style.overflow = 'hidden';
+    });
+  });
 });
 
 /***/ })
