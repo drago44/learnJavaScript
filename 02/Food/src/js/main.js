@@ -45,11 +45,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const deadline = '2022-09-1';
 
   function getTimeRemaining(endtime) {
+    let days, hours, minutes, seconds;
     const t = Date.parse(endtime) - Date.parse(new Date());
-    const days = Math.floor(t / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((t / (1000 * 60 * 60) % 24));
-    const minutes = Math.floor((t / 1000 / 60) % 60);
-    const seconds = Math.floor((t / 1000) % 60);
+
+    if (t <= 0) {
+      days = 0;
+      hours = 0;
+      minutes = 0;
+      seconds = 0;
+    } else {
+      days = Math.floor(t / (1000 * 60 * 60 * 24));
+      hours = Math.floor((t / (1000 * 60 * 60) % 24));
+      minutes = Math.floor((t / 1000 / 60) % 60);
+      seconds = Math.floor((t / 1000) % 60);
+    }
 
     return {
       'total': t,
@@ -60,8 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  function getZero(num){
-    if (num >= 0 && num < 10){
+  function getZero(num) {
+    if (num >= 0 && num < 10) {
       return `0${num}`
     } else {
       return num
