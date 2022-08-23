@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
       closeModal();
     }
   });
-  const modalTimerId = setTimeout();
+  const modalTimerId = setTimeout(openModal, 3000);
 });
 
 /***/ })
