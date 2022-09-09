@@ -109,7 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function showTabContent(i = 0) {
+  function showTabContent() {
+    let i = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
     tabContent[i].classList.add('show', 'fade');
     tabContent[i].classList.remove('hide');
     tab[i].classList.add('tabheader__item_active');
@@ -230,12 +231,17 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', showModalByScroll); //Make classes for cards
 
   class MenuCard {
-    constructor(src, alt, title, desc, price, parentSelector, ...classes) {
+    constructor(src, alt, title, desc, price, parentSelector) {
       this.src = src;
       this.alt = alt;
       this.title = title;
       this.desc = desc;
       this.price = price;
+
+      for (var _len = arguments.length, classes = new Array(_len > 6 ? _len - 6 : 0), _key = 6; _key < _len; _key++) {
+        classes[_key - 6] = arguments[_key];
+      }
+
       this.classes = classes;
       this.parent = document.querySelector(parentSelector);
       this.transfer = 35;
@@ -276,7 +282,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   new MenuCard("img/tabs/vegy.jpg", "vegy", 'Меню "Фитнес"', 'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!', 7, '.menu .container').render();
   new MenuCard("img/tabs/elite.jpg", "elite", 'Меню “Премиум”', 'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!', 16, '.menu .container').render();
-  new MenuCard("img/tabs/post.jpg", "post", 'Меню "Постное"', 'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.', 12, '.menu .container').render(); // level: advanced XMLHttp request     JSON/AJAX
+  new MenuCard("img/tabs/post.jpg", "post", 'Меню "Постное"', 'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.', 12, '.menu .container').render(); // level: advanced - XMLHttp request / JSON / AJAX / Fetch / API / Promise
+  // fetch('https://jsonplaceholder.typicode.com/posts', {
+  //   method: "POST",
+  //   body: JSON.stringify({ name: 'Alex' }),
+  //   headers:{
+  //     'Content-type': 'application/json'
+  //   }
+  // })
+  //   .then(response => response.json())
+  //   .then(json => console.log(json));
   //Forms
 
   const forms = document.querySelectorAll('form');
@@ -299,25 +314,25 @@ document.addEventListener('DOMContentLoaded', () => {
         margin: 0 auto;
       `;
       form.insertAdjacentElement('afterend', statusMessage);
-      const request = new XMLHttpRequest();
-      request.open('POST', 'server.php');
-      request.setRequestHeader('Content-type', 'aplication/json');
       const formData = new FormData(form);
-      const obj = {};
+      const object = {};
       formData.forEach(function (value, key) {
-        obj[key] = value;
+        object[key] = value;
       });
-      const jsonFormData = JSON.stringify(obj);
-      request.send(jsonFormData);
-      request.addEventListener('load', () => {
-        if (request.status === 200) {
-          console.log(request.response);
-          showThanksModal(message.success);
-          statusMessage.remove();
-          form.reset();
-        } else {
-          showThanksModal(message.failure);
-        }
+      fetch('server.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(object)
+      }).then(data => data.text()).then(data => {
+        console.log(data);
+        showThanksModal(message.success);
+        statusMessage.remove();
+      }).catch(() => {
+        showThanksModal(message.failure);
+      }).finally(() => {
+        form.reset();
       });
     });
   } // Modal message after Form POST
