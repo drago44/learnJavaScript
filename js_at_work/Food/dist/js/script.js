@@ -298,7 +298,30 @@ document.addEventListener('DOMContentLoaded', () => {
       } = _ref;
       new MenuCard(img, alt, title, desc, price, '.menu .container').render();
     });
-  }); // level: advanced - XMLHttp request / JSON / AJAX / Fetch / API / Promise
+  }); // ====================================== the second example is without a template ===============
+  // getResourse('http://localhost:3000/menu')
+  //   .then(data => createCard(data));
+  // function createCard(data) {
+  //   data.forEach(({ img, alt, title, desc, price }) => {
+  //     const element = document.createElement('div');
+  //     const uah = 35;
+  //     price = price * uah;
+  //     element.classList.add("menu__item");
+  //     element.innerHTML = `
+  //               <img src=${img} alt=${alt}>
+  //               <h3 class="menu__item-subtitle">${title}</h3>
+  //               <div class="menu__item-descr">${desc}</div>
+  //               <div class="menu__item-divider"></div>
+  //               <div class="menu__item-price">
+  //                   <div class="menu__item-cost">Цена:</div>
+  //                   <div class="menu__item-total"><span>${price}</span> грн/день</div>
+  //               </div>
+  //           `;
+  //     document.querySelector(".menu .container").append(element);
+  //   });
+  // };
+  // ==========================================================================================
+  // level: advanced - XMLHttp request / JSON / AJAX / Fetch / API / Promise
   // fetch('https://jsonplaceholder.typicode.com/posts', {
   //   method: "POST",
   //   body: JSON.stringify({ name: 'Alex' }),
