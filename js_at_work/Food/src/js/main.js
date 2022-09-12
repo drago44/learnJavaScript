@@ -202,37 +202,12 @@ document.addEventListener('DOMContentLoaded', () => {
     return await res.json();
   };
 
-  // first example
-  // const div = new MenuCard();
-  // div.render();
-
-  new MenuCard(
-    "img/tabs/vegy.jpg",
-    "vegy",
-    'Меню "Фитнес"',
-    'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
-    7,
-    '.menu .container'
-  ).render();
-
-  new MenuCard(
-    "img/tabs/elite.jpg",
-    "elite",
-    'Меню “Премиум”',
-    'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
-    16,
-    '.menu .container'
-  ).render();
-
-  new MenuCard(
-    "img/tabs/post.jpg",
-    "post",
-    'Меню "Постное"',
-    'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',
-    12,
-    '.menu .container',
-  ).render();
-
+  getResourse('http://localhost:3000/menu')
+  .then(data => {
+    data.forEach(({img, alt, title, desc, price}) =>{
+      new MenuCard(img, alt, title, desc, price, '.menu .container').render();
+    });
+  });
 
   // level: advanced - XMLHttp request / JSON / AJAX / Fetch / API / Promise
 
@@ -330,8 +305,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // JSON server
 
-  fetch('http://localhost:3000/menu')
-    .then(data => data.json())
-    .then(res => console.log(res));
+  // fetch('http://localhost:3000/menu')
+  //   .then(data => data.json())
+  //   .then(res => console.log(res));
 
 });
