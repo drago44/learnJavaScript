@@ -275,7 +275,8 @@ document.addEventListener('DOMContentLoaded', () => {
       this.parent.append(element);
     }
 
-  }
+  } // getResourse for class MenuCard
+
 
   const getResourse = async url => {
     const res = await fetch(url);
@@ -298,7 +299,14 @@ document.addEventListener('DOMContentLoaded', () => {
       } = _ref;
       new MenuCard(img, alt, title, desc, price, '.menu .container').render();
     });
-  }); // ====================================== the second example is without a template ===============
+  }); // ====================================== axios ===================================
+  // axios.get('http://localhost:3000/menu')
+  //   .then(data => {
+  //     data.data.forEach(({ img, alt, title, desc, price }) => {
+  //       new MenuCard(img, alt, title, desc, price, '.menu .container').render();
+  //     });
+  //   });
+  // ====================================== the second example is without a template ===============
   // getResourse('http://localhost:3000/menu')
   //   .then(data => createCard(data));
   // function createCard(data) {
