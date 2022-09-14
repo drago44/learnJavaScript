@@ -368,6 +368,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let offset = 0;
 
+  const slider = document.querySelector('.offer__slider');
+
   // ================== Slider 1 ================
 
   // showSlides(slideIndex);
@@ -430,6 +432,43 @@ document.addEventListener('DOMContentLoaded', () => {
     slide.style.width = width;
   });
 
+  slider.style.position = 'relative';
+
+  const indicators = document.createElement('ol');
+  const dots = [];
+  indicators.classList.add('carousel-indicators');
+
+  // or without css
+
+  // indicators.classList.add('carousel-indicators');
+  // indicators.style.cssText = `
+  //     position: absolute;
+  //     right: 0;
+  //     bottom: 0;
+  //     left: 0;
+  //     z-index: 15;
+  //     display: flex;
+  //     justify-content: center;
+  //     margin-right: 15%;
+  //     margin-left: 15%;
+  //     list-style: none;
+  // `; 
+
+  slider.append(indicators);
+
+  for (let i = 0; i < slides.length; i++) {
+    const dot = document.createElement('li');
+    dot.setAttribute('data-slide-to', i + 1);
+    dot.classList.add('dot');
+
+    if (i == 0) {
+      dot.style.opacity = 1;
+    }
+
+    indicators.append(dot);
+    dots.push(dot);
+  }
+
   prev.addEventListener('click', () => {
     if (offset == 0) {
       offset = +width.slice(0, width.length - 2) * (slides.length - 1);
@@ -450,6 +489,9 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       current.textContent = slideIndex;
     }
+
+    dots.forEach(dot => dot.style.opacity = ".5");
+    dots[slideIndex - 1].style.opacity = 1;
   });
 
   next.addEventListener('click', () => {
@@ -472,6 +514,29 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       current.textContent = slideIndex;
     }
+
+    dots.forEach(dot => dot.style.opacity = ".5");
+    dots[slideIndex - 1].style.opacity = 1;
+  });
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', (e) => {
+      const slideTo = e.target.getAttribute('data-slide-to');
+
+      slideIndex = slideTo;
+      offset = +width.slice(0, width.length - 2) * (slideTo - 1);
+
+      slidesField.style.transform = `translateX(-${offset}px)`;
+
+      if (slides.length < 10) {
+        current.textContent = `0${slideIndex}`;
+      } else {
+        current.textContent = slideIndex;
+      }
+
+      dots.forEach(dot => dot.style.opacity = ".5");
+      dots[slideIndex - 1].style.opacity = 1;
+    });
   });
 
 });
