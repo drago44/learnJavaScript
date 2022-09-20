@@ -222,7 +222,7 @@ function calc() {
       if (input.value.match(/\D/g)) {
         input.style.border = "1px solid red";
       } else {
-        input.style.border = 'none';
+        input.style.border = '1px solid #54ED39';
       }
 
       switch (input.getAttribute('id')) {
@@ -279,7 +279,7 @@ function cards() {
 
       this.classes = classes;
       this.parent = document.querySelector(parentSelector);
-      this.transfer = 27;
+      this.transfer = 37;
       this.changeToUAH();
     }
 
