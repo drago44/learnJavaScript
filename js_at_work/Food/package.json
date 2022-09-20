@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "json-server --watch db.json --port 3000"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +24,7 @@
     "gulp-clean-css": "^4.2.0",
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^5.1.0",
+    "json-server": "^0.17.0",
     "sass": "^1.50.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
